@@ -24,7 +24,6 @@ class Program
             Console.WriteLine(" Wybierz opcję : ");
 
             string opcja = Console.ReadLine();
-
             switch (opcja)
             {
                 case "1":
@@ -46,12 +45,15 @@ class Program
                     Wyswietlwszystkie();
                     break;
                 case "7":
+                    ZapiszDane();
                     Console.WriteLine("Zamykanie programu.");
                     return;
                 default:
-                    Console.WriteLine("Nieprawidłowy wybór");
+                    Console.WriteLine("Niepoprawna wybór, spróbuj ponownie.");
                     break;
             }
+            Console.WriteLine("\nNaciśnij dowolny klawisz, aby kontynuować.");
+            Console.ReadKey();
         }
     }
     public static void ZapiszDane()
@@ -76,7 +78,6 @@ class Program
         {
             Console.WriteLine("Niepoprawna ilość!");
             return;
-
         }
         Console.WriteLine("[Podaj  cenę narzędzia : ");
         if (!decimal.TryParse(Console.ReadLine(), out decimal cena) || cena <= 0)
@@ -86,87 +87,93 @@ class Program
         }
         int id = magazyn.Count > 0 ? magazyn[^1].Id + 1 : 1;
         magazyn.Add(new narzedzia { Id = id, nazwa = nazwa, Ilosc = ilosc, Cena = cena });
-        ZapiszDane();
-        Console.WriteLine("Dodano narzędzie : !");
+        Console.WriteLine($"Dodano narzędzie {nazwa}");
     }
     public static void AktualizujNarzedzia()
     {
-        Console.WriteLine("[Podaj id narzędzia : ");
+        Console.WriteLine("[Podaj ID narzędzia : ");
         if (!int.TryParse(Console.ReadLine(), out int id))
         {
             Console.WriteLine("Niepoprawne ID!");
             return;
         }
-        var narzedzie = magazyn.Find(n => n.Id == id);
+        narzedzia narzedzie = magazyn.Find(n => n.Id == id);
         if (narzedzie == null)
         {
-            Console.WriteLine("Nie znaleziono narzędzia!");
+            Console.WriteLine("Nie znaleziono narzędzia.");
             return;
         }
         Console.WriteLine("[Podaj nazwę narzędzia : ");
-
+        narzedzie.nazwa = Console.ReadLine();
         Console.WriteLine("[Podaj ilość narzędzi : ");
         if (!int.TryParse(Console.ReadLine(), out int ilosc) || ilosc <= 0)
         {
             Console.WriteLine("Niepoprawna ilość!");
             return;
         }
+            narzedzie.Ilosc = ilosc;
         Console.WriteLine("[Podaj cenę narzędzia : ");
         if (!decimal.TryParse(Console.ReadLine(), out decimal cena) || cena <= 0)
         {
             Console.WriteLine("Niepoprawna cena!");
             return;
         }
-        narzedzie.Ilosc = ilosc;
         narzedzie.Cena = cena;
         ZapiszDane();
         Console.WriteLine("Narzędzie zaktualizowane!");
     }
     public static void UsunNarzedzia()
     {
-        Console.WriteLine("[Podaj id narzędzia : ");
+        Console.WriteLine("[Podaj ID narzędzia : ");
         if (!int.TryParse(Console.ReadLine(), out int id))
         {
             Console.WriteLine("Niepoprawne ID!");
             return;
         }
-        var narzedzie = magazyn.Find(n => n.Id == id);
+        narzedzia narzedzie = magazyn.Find(n => n.Id == id);
         if (narzedzie == null)
         {
-            Console.WriteLine("Nie znaleziono narzędzia!");
+            Console.WriteLine("Nie znaleziono narzędzia.");
             return;
         }
         magazyn.Remove(narzedzie);
-        ZapiszDane();
-        Console.WriteLine("Usunięto narzędzie : ");
+        Console.WriteLine($"Usunięto narzędzie {narzedzie.nazwa}");
     }
 
     public static void ZapiszNarzedzia()
     {
-        Console.WriteLine("Narzędzia zapisane : ");
-
+        Console.WriteLine("Narzędzia zapisane.");
     }
     public static void Wyswietlpojedyncze()
     {
-        Console.WriteLine("[Podaj id narzędzia : ");
-
+        Console.WriteLine("[Podaj ID narzędzia : ");
+        if (!int.TryParse(Console.ReadLine(), out int id))
+        {
+            Console.WriteLine("Niepoprawne ID!");
+            return;
+        }
+        narzedzia narzedzie = magazyn.Find(n => n.Id == id);
+        if (narzedzie == null)
+        {
+            Console.WriteLine("Nie znaleziono narzędzia.");
+            return;
+        }
+        Console.WriteLine($"Id: {narzedzie.Id}, Nazwa: {narzedzie.nazwa}, Ilość: {narzedzie.Ilosc}, Cena: {narzedzie.Cena}");
     }
-    public static void Wyswietlwszystkie()
+public static void Wyswietlwszystkie()
     {
-            Console.WriteLine("\n Magazyn Narzędzi");
-            if (magazyn.Count == 0)
-            {
-                Console.WriteLine("Brak narzędzi w magazynie.");
-            }
-            else
-            {
-                foreach (var narzedzie in magazyn)
-                {
-                    Console.WriteLine($"ID: {narzedzie.Id}, Nazwa: {narzedzie.nazwa}, Ilość: {narzedzie.Ilosc}, Cena: {narzedzie.Cena}");
-                }
-            }
-            Console.WriteLine("\nNaciśnij ENTER, aby wrócić do menu .");
-            Console.ReadLine();
+        if (magazyn.Count == 0)
+        {
+            Console.WriteLine("Magazyn jest pusty.");
+            return;
+        }
+
+        foreach (var narzedzie in magazyn)
+        {
+            Console.WriteLine($"Id: {narzedzie.Id}, Nazwa: {narzedzie.nazwa}, Ilość: {narzedzie.Ilosc}, Cena: {narzedzie.Cena}");
+        }
+    //Console.WriteLine("\nNaciśnij ENTER, aby wrócić do menu .");
+         //   Console.ReadLine();
     }
     class narzedzia
     {
