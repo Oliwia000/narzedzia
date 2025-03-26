@@ -55,24 +55,24 @@ class Program
     }
     public static void ZapiszDane()
     {
+       
 
     }
     public static void WczytajDane()
     {
 
     }
-
-    public static void DodajNarzedzie() { 
-    Console.WriteLine(" Podaj nazwę narzędzia :");
+   public static void DodajNarzedzie() { 
+    Console.WriteLine(" [Podaj  nazwę narzędzia :");
     string nazwa = Console.ReadLine();
-    Console.Write("Podaj ilość narzędzi : ");
+    Console.Write("[Podaj  ilość narzędzi : ");
     if (!int.TryParse(Console.ReadLine(), out int ilosc) || ilosc <= 0)
     {
         Console.WriteLine("Niepoprawna ilość!");
         return;
 
     }
-        Console.WriteLine("Podaj cenę narzędzia : ");
+        Console.WriteLine("[Podaj  cenę narzędzia : ");
        if (!decimal.TryParse(Console.ReadLine(), out decimal cena) || cena <= 0)
         {
             Console.WriteLine("Niepoprawna cena!");
@@ -83,8 +83,14 @@ class Program
         ZapiszDane();
         Console.WriteLine("Dodano narzędzie : !");
     }
-    public static void AktualizujNarzedzia() { 
+    public static void AktualizujNarzedzia() {
+        Console.WriteLine("[Podaj id narzędzia : ");
 
+        Console.WriteLine("[Podaj nazwę narzędzia : ");
+
+        Console.WriteLine("[Podaj ilość narzędzi : ");
+
+        Console.WriteLine("[Podaj cenę narzędzia : ");
     }
 
     public static void UsunNarzedzia()
