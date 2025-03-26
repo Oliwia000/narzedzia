@@ -163,7 +163,7 @@ class Program
                     Console.WriteLine($"ID: {narzedzie.Id}, Nazwa: {narzedzie.nazwa}, Ilość: {narzedzie.Ilosc}, Cena: {narzedzie.Cena}");
                 }
             }
-            Console.WriteLine("\nNaciśnij ENTER, aby kontynuować...");
+            Console.WriteLine("\nNaciśnij ENTER, aby wrócić do menu .");
             Console.ReadLine();
     }
     class narzedzia
