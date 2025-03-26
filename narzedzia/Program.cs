@@ -6,7 +6,7 @@ class Program
 {
     static string filePath = "magazyn.json";
     static List<narzedzia> magazyn = new List<narzedzia>();
-    static void Main()
+     public static void Main()
     {
         WczytajDane();
         while (true)
@@ -55,35 +55,37 @@ class Program
     }
     public static void ZapiszDane()
     {
-       
+
 
     }
     public static void WczytajDane()
     {
 
     }
-   public static void DodajNarzedzie() { 
-    Console.WriteLine(" [Podaj  nazwę narzędzia :");
-    string nazwa = Console.ReadLine();
-    Console.Write("[Podaj  ilość narzędzi : ");
-    if (!int.TryParse(Console.ReadLine(), out int ilosc) || ilosc <= 0)
+    public static void DodajNarzedzie()
     {
-        Console.WriteLine("Niepoprawna ilość!");
-        return;
+        Console.WriteLine(" [Podaj  nazwę narzędzia :");
+        string nazwa = Console.ReadLine();
+        Console.Write("[Podaj  ilość narzędzi : ");
+        if (!int.TryParse(Console.ReadLine(), out int ilosc) || ilosc <= 0)
+        {
+            Console.WriteLine("Niepoprawna ilość!");
+            return;
 
-    }
+        }
         Console.WriteLine("[Podaj  cenę narzędzia : ");
-       if (!decimal.TryParse(Console.ReadLine(), out decimal cena) || cena <= 0)
+        if (!decimal.TryParse(Console.ReadLine(), out decimal cena) || cena <= 0)
         {
             Console.WriteLine("Niepoprawna cena!");
             return;
         }
         int id = magazyn.Count > 0 ? magazyn[^1].Id + 1 : 1;
-        magazyn.Add(new narzedzia { Id = id, Nazwa = nazwa, Ilosc = ilosc, Cena = cena });
+        magazyn.Add(new narzedzia { Id = id, nazwa = nazwa, Ilosc = ilosc, Cena = cena });
         ZapiszDane();
         Console.WriteLine("Dodano narzędzie : !");
     }
-    public static void AktualizujNarzedzia() {
+    public static void AktualizujNarzedzia()
+    {
         Console.WriteLine("[Podaj id narzędzia : ");
 
         Console.WriteLine("[Podaj nazwę narzędzia : ");
@@ -96,11 +98,24 @@ class Program
     public static void UsunNarzedzia()
     {
         Console.WriteLine("[Podaj id narzędzia : ");
-
+        if (!int.TryParse(Console.ReadLine(), out int id))
+        {
+            Console.WriteLine("Niepoprawne ID!");
+            return;
+        }
+        var narzedzie = magazyn.Find(n => n.Id == id);
+        if (narzedzie == null)
+        {
+            Console.WriteLine("Nie znaleziono narzędzia!");
+            return;
+        }
+        magazyn.Remove(narzedzie);
+        ZapiszDane();
+        Console.WriteLine("Usunięto narzędzie : ");
     }
     public static void ZapiszNarzedzia()
     {
-
+        Console.WriteLine("Narzędzia zapisane : ");
     }
     public static void Wyswietlpojedyncze()
     {
@@ -110,7 +125,14 @@ class Program
     {
 
     }
-   
 
-
+    class narzedzia
+    {
+        public int Id { get; set; }
+        public string nazwa { get; set; }
+        public int Ilosc { get; set; }
+        public decimal Cena { get; set; }
+    }
 }
+
+
