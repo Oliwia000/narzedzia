@@ -95,6 +95,7 @@ class Program
 
     public static void UsunNarzedzia()
     {
+        Console.WriteLine("[Podaj id narzędzia : ");
 
     }
     public static void ZapiszNarzedzia()
@@ -103,7 +104,7 @@ class Program
     }
     public static void Wyswietlpojedyncze()
     {
-
+        Console.WriteLine("[Podaj id narzędzia : ");
     }
     public static void Wyswietlwszystkie()
     {
