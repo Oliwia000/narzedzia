@@ -144,10 +144,12 @@ class Program
     public static void ZapiszNarzedzia()
     {
         Console.WriteLine("Narzędzia zapisane : ");
+
     }
     public static void Wyswietlpojedyncze()
     {
         Console.WriteLine("[Podaj id narzędzia : ");
+
     }
     public static void Wyswietlwszystkie()
     {
