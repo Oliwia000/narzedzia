@@ -151,9 +151,21 @@ class Program
     }
     public static void Wyswietlwszystkie()
     {
-
+            Console.WriteLine("\n Magazyn Narzędzi");
+            if (magazyn.Count == 0)
+            {
+                Console.WriteLine("Brak narzędzi w magazynie.");
+            }
+            else
+            {
+                foreach (var narzedzie in magazyn)
+                {
+                    Console.WriteLine($"ID: {narzedzie.Id}, Nazwa: {narzedzie.nazwa}, Ilość: {narzedzie.Ilosc}, Cena: {narzedzie.Cena}");
+                }
+            }
+            Console.WriteLine("\nNaciśnij ENTER, aby kontynuować...");
+            Console.ReadLine();
     }
-
     class narzedzia
     {
         public int Id { get; set; }
