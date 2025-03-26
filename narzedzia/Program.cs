@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 class Program
 {
@@ -54,14 +55,18 @@ class Program
         }
     }
     public static void ZapiszDane()
-    {
-
-
-    }
+        {
+           string json = JsonSerializer.Serialize(magazyn, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, json);
+        }
     public static void WczytajDane()
-    {
-
-    }
+        {
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                magazyn = JsonSerializer.Deserialize<List<narzedzia>>(json) ?? new List<narzedzia>();
+            }
+        }
     public static void DodajNarzedzie()
     {
         Console.WriteLine(" [Podaj  nazwę narzędzia :");
@@ -135,6 +140,7 @@ class Program
         ZapiszDane();
         Console.WriteLine("Usunięto narzędzie : ");
     }
+
     public static void ZapiszNarzedzia()
     {
         Console.WriteLine("Narzędzia zapisane : ");
